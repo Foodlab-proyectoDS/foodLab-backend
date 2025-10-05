@@ -1,0 +1,88 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.foodlab.foodlab.models;
+
+import java.util.UUID;
+
+/**
+ *
+ * @author BryanVanegas
+ */
+public class Producto {
+
+    private String idProducto;
+    private String categoria;
+    private String nombre;
+    private String descripcion;
+    private double precio;
+    private String imagen;
+
+    public Producto() {
+        this.idProducto = UUID.randomUUID().toString();
+    }
+
+    public Producto(String categoria, String nombre, String descripcion, double precio, String imagen) {
+        this.idProducto=UUID.randomUUID().toString();
+        this.categoria = categoria;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.imagen=imagen;
+    }
+
+    public String getIdProducto() {
+        return idProducto;
+    }
+
+    public void setId(String id) {
+        this.idProducto = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public Producto(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    
+}
