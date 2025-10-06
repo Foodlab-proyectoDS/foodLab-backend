@@ -15,10 +15,10 @@ public class Receipt {
 
     private String idReceipt;
     private String date;
-    private final double delivery =5000;
+    private final double delivery = 5000;
     private double discount;
     private double total;
-     @JsonIgnore
+    @JsonIgnore
     private Order order;
 
     public Receipt(Order order) {
@@ -30,15 +30,19 @@ public class Receipt {
     }
 
     public final double calculateDiscount(Order order) {
+        double value = order.getTotal() * 1000;
+        
         if (order.getProducts().size() > 4) {
-            return 0.05;
+            return value * 0.05;
         }
         return 0;
     }
 
     public final double calculateTotal(Order order) {
-        return this.discount == 0 ? (this.order.getTotal() + this.delivery)
-                : ((this.order.getTotal() - (this.order.getTotal() * this.discount)) + this.delivery);
+        double value = order.getTotal() * 1000;
+
+        return this.discount == 0 ? (value + this.delivery)
+                : ((value - calculateDiscount(order)) + this.delivery);
     }
 
     public String getIdReceipt() {
