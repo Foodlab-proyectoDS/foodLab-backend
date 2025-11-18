@@ -11,29 +11,21 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
  * @author BryanVanegas
  */
 @RestController
-@RequestMapping("foodlab/metodopago")
+@RequestMapping("api/foodlab/metodopago")
 @Tag(name = "Métodos de Pago", description = "API para la gestión de los métodos de pago")
 public class MetodoPagoController {
 
     private final MetodoPagoService metodoService;
 
-    @Autowired
     public MetodoPagoController(MetodoPagoService metodoService) {
         this.metodoService = metodoService;
     }
@@ -44,8 +36,8 @@ public class MetodoPagoController {
             @ApiResponse(responseCode = "200", description = "Método de pago encontrado"),
             @ApiResponse(responseCode = "404", description = "Método de pago no encontrado")
     })
-    public ResponseEntity<MetodoPago> getMetodoPagoUsuario(@PathVariable @Parameter(description = "Id del usuario") String userId) {
-        MetodoPago existingMetodo = metodoService.searchMetodoPagoUsuario(userId);
+    public ResponseEntity<MetodoPago> getMetodoPorUsuarioId(@PathVariable @Parameter(description = "Id del usuario") Integer userId) {
+        MetodoPago existingMetodo = metodoService.findByUsuarioId(userId);
         if (existingMetodo != null) {
             return new ResponseEntity<>(existingMetodo, HttpStatus.OK);
         } else {
@@ -59,8 +51,8 @@ public class MetodoPagoController {
             @ApiResponse(responseCode = "200", description = "Método de pago encontrado"),
             @ApiResponse(responseCode = "404", description = "Método de pago no encontrado")
     })
-    public ResponseEntity<MetodoPago> getMetodoPagoUsuario(@PathVariable @Parameter(description = "Número del método de pago a buscar") Long numero) {
-        MetodoPago existingMetodo = metodoService.searchMetodoById(numero);
+    public ResponseEntity<MetodoPago> getMetodo(@PathVariable @Parameter(description = "Número del método de pago a buscar") Integer numero) {
+        MetodoPago existingMetodo = metodoService.findById(numero);
         if (existingMetodo != null) {
             return new ResponseEntity<>(existingMetodo, HttpStatus.OK);
         } else {
@@ -86,9 +78,9 @@ public class MetodoPagoController {
         @ApiResponse(responseCode = "404", description = "Método de pago no encotrado")
     })
     public ResponseEntity<Void> deleteMetodo(
-            @Parameter(description = "Número del método de pago a eliminar") @PathVariable Long numero) {
+            @Parameter(description = "Número del método de pago a eliminar") @PathVariable Integer numero) {
 
-        MetodoPago existingMetodo = metodoService.searchMetodoById(numero);
+        MetodoPago existingMetodo = metodoService.findById(numero);
         if (existingMetodo != null) {
             metodoService.deleteMetodo(numero);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
