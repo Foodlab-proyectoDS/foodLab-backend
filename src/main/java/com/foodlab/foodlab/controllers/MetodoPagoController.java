@@ -63,7 +63,7 @@ public class MetodoPagoController {
     @PostMapping
     @Operation(summary = "Guarda método de pago", description = "Guarda un nuevo método de pago ingresado")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Método guardado exitosamente"),
+        @ApiResponse(responseCode = "201", description = "Método guardado exitosamente"),
         @ApiResponse(responseCode = "400", description = "Datos inválidos"),})
     public ResponseEntity<MetodoPago> saveMetodoPago(
             @Parameter(description = "Datos del método de pago") @RequestBody MetodoPago metodo) {
@@ -74,7 +74,7 @@ public class MetodoPagoController {
     @DeleteMapping("/{numero}")
     @Operation(summary = "Eliminar método de pago", description = "Se busca el método de pago con su número y se elimina")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Se eliminó el método de pago"),
+        @ApiResponse(responseCode = "204", description = "Se eliminó el método de pago"),
         @ApiResponse(responseCode = "404", description = "Método de pago no encotrado")
     })
     public ResponseEntity<Void> deleteMetodo(

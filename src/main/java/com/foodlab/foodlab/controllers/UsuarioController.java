@@ -81,7 +81,7 @@ public class UsuarioController {
     @Operation(summary = "Buscar usuario por email y contraseña.Hacer el login", description = "Buscar un usuario en especifico por su email y contraseña")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Usuario encontrado con exito"),
-            @ApiResponse(responseCode = "404", description = "Usuario NO encontrado")
+            @ApiResponse(responseCode = "401", description = "Usuario NO encontrado")
     })
     public ResponseEntity<?> login(
             @Parameter(description = "Email del usuario a buscar") @RequestBody LoginRequestDTO loginRequest) {
@@ -116,7 +116,7 @@ public class UsuarioController {
     @PostMapping
     @Operation(summary = "Registrar un nuevo usuario", description = "Crear un nuevo usuario para guadarlo")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Usuario registrado exitosamente"),
+            @ApiResponse(responseCode = "201", description = "Usuario registrado exitosamente"),
             @ApiResponse(responseCode = "400", description = "Datos invalidos")
     })
     public ResponseEntity<Usuario> createUsuario(
@@ -164,7 +164,7 @@ public class UsuarioController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar un usuario", description = "Eliminar un usuario en especifico por su ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Usuario eliminado exitosamente"),
+            @ApiResponse(responseCode = "204", description = "Usuario eliminado exitosamente"),
             @ApiResponse(responseCode = "404", description = "Usuario NO encontrado")
     })
     public ResponseEntity<Void> deleteUsuario(
