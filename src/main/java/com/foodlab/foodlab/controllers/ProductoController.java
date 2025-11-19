@@ -69,7 +69,7 @@ public class ProductoController {
         return new ResponseEntity<>(info, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{idProducto}")
     @Operation(summary = "Buscar un producto por su ID", description = "Buscar un producto en especifico por su ID")
     @ApiResponses(value={
         @ApiResponse(responseCode = "200", description = "Producto encontrado con exito"),
@@ -88,7 +88,7 @@ public class ProductoController {
     @PostMapping
     @Operation(summary = "Crear un nuevo producto", description = "Crear y registrar un nuevo producto")
     @ApiResponses(value={
-        @ApiResponse(responseCode="200", description = "Se creo y registro correctamente el producto"),
+        @ApiResponse(responseCode="201", description = "Se creo y registro correctamente el producto"),
         @ApiResponse(responseCode = "400", description = "Datos invalidos")
     })
     public ResponseEntity<Producto> createProducto(
@@ -117,7 +117,7 @@ public class ProductoController {
         }
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/{idProducto}")
     @Operation(summary = "Actualizar algunos datos de un producto", description = "Actualizar algunos datos parcialmente de un producto")
     @ApiResponses(value={
         @ApiResponse(responseCode = "200", description = "Se actualizaron los datos correctamente"),
@@ -137,7 +137,7 @@ public class ProductoController {
     @DeleteMapping("/{idProducto}")
     @Operation(summary = "Eliminar un producto", description = "Eliminar un producto en especifico por su ID")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Producto eliminado exitosamente"),
+        @ApiResponse(responseCode = "204", description = "Producto eliminado exitosamente"),
         @ApiResponse(responseCode = "404", description = "Producto NO encontrado")
     })
     public ResponseEntity<Void> deleteProducto(
